@@ -9,4 +9,6 @@
     <string name="already_a_member">Already a Member?</string>
     <string name="hello_buddy">Hello Buddy</string>
     <string name="login_to_continue">Login to Continue</string>
+    <string name="blood_donating_app">Blood Donating App</string>
+    <string name="blood_donor_finder">Blood Donor Finder</string>
 </resources>
