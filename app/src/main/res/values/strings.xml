@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">FirebaseEmailAuthentication</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="sign_up_to_continue">Sign-up to Continue</string>
+    <string name="welcome">Welcome</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="already_a_member">Already a Member?</string>
+    <string name="hello_buddy">Hello Buddy</string>
+    <string name="login_to_continue">Login to Continue</string>
 </resources>
