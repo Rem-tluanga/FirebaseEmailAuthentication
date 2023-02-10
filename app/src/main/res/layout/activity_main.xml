@@ -28,36 +28,38 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="130dp"
-        android:layout_height="74dp"
+        android:id="@+id/btn_find"
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="136dp"
+        android:layout_marginStart="140dp"
         android:layout_marginTop="185dp"
-        app:backgroundTint="#880808"
-        android:text="Find Donor" />
+        android:text="@string/find_donor"
+        app:backgroundTint="#880808" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_register"
         android:layout_width="130dp"
         android:layout_height="74dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="143dp"
-        android:layout_marginTop="306dp"
-        app:backgroundTint="#880808"
-        android:text="Register for Donor" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="373dp"
+        android:text="@string/register_for_donor"
+        app:backgroundTint="#880808" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btn_login"
         android:layout_width="130dp"
         android:layout_height="74dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="227dp"
-        app:backgroundTint="#880808"
-        android:text="Sign In" />
+        android:layout_marginStart="136dp"
+        android:layout_marginBottom="107dp"
+        android:text="@string/login1"
+        app:backgroundTint="#880808" />
 
 
 </RelativeLayout>

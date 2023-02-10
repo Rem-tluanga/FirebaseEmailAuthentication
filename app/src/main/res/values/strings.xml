@@ -11,4 +11,26 @@
     <string name="login_to_continue">Login to Continue</string>
     <string name="blood_donating_app">Blood Donating App</string>
     <string name="blood_donor_finder">Blood Donor Finder</string>
+    <string name="register_for_donor">Register for Donor</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="find_donor">Find Donor</string>
+    <string name="login1">Login</string>
+    <string name="reset">Reset</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="name">Name</string>
+    <string name="father_s_mother_s_name">Father\'s/Mother\'s Name</string>
+    <string name="ph_no">Ph.No</string>
+    <string name="address">Address</string>
+    <string name="state">State</string>
+    <string-array name="Blood_Group">
+        <item>A+</item>
+        <item>O+</item>
+        <item>B+</item>
+        <item>AB+</item>
+        <item>A-</item>
+        <item>O-</item>
+        <item>B-</item>
+        <item>AB-</item>
+
+    </string-array>
 </resources>
