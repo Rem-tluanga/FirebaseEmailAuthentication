@@ -25,14 +25,13 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+public class LoginActivity extends AppCompatActivity{
 
     private TextInputEditText userEmail, userPassword;
     private MaterialButton login_btn;
     private TextView reset_tv;
     private FirebaseAuth mAuth;
     private ProgressBar login_progress;
-    private Spinner spinner;
 
 
     @Override
@@ -45,16 +44,11 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         login_btn = findViewById(R.id.login_btn);
         login_progress = findViewById(R.id.login_progress);
         reset_tv = findViewById(R.id.reset_tv);
-        spinner = findViewById(R.id.spinner);
+
 
         mAuth = FirebaseAuth.getInstance();
 
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.Blood_Group, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        spinner.setOnItemSelectedListener(this);
 
 
         login_btn.setOnClickListener(new View.OnClickListener() {
@@ -135,20 +129,4 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
     }
 
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        String choice = adapterView.getItemAtPosition(i).toString();
-        Toast.makeText(getApplicationContext(),choice,Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
 }

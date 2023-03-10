@@ -8,7 +8,10 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,16 +28,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.jar.Attributes;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
 
-    private TextInputEditText userEmail, userPassword;
+    private TextInputEditText userEmail, userPassword, userName, locality, district, phno, state,age;
     private MaterialButton register_btn;
     private TextView login_tv;
     private FirebaseAuth mAuth;
     private ProgressBar register_progress;
+    private Spinner spinnerBloodGroup;
     String UserID;
-
 
 
     @Override
@@ -47,6 +51,13 @@ public class SignupActivity extends AppCompatActivity {
         login_tv = findViewById(R.id.login_tv);
         register_btn = findViewById(R.id.register_btn);
         register_progress = findViewById(R.id.register_progress);
+        spinnerBloodGroup = findViewById(R.id.spinner_blood_group);
+        userName = findViewById(R.id.Name);
+        locality = findViewById(R.id.Locality);
+        phno = findViewById(R.id.Phno);
+        state = findViewById(R.id.State);
+        district = findViewById(R.id.District);
+        age = findViewById(R.id.Age);
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -78,6 +89,14 @@ public class SignupActivity extends AppCompatActivity {
             startActivity(new Intent(this,LoginActivity.class));
             finish();
         });
+
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.Blood_Group, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerBloodGroup.setAdapter(adapter);
+
+        spinnerBloodGroup.setOnItemSelectedListener(this);
+
 
 
 
@@ -142,5 +161,16 @@ public class SignupActivity extends AppCompatActivity {
             finish();
             startActivity(new Intent(SignupActivity.this, ProfileActivity.class));
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String choice = adapterView.getItemAtPosition(i).toString();
+        Toast.makeText(getApplicationContext(),choice,Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

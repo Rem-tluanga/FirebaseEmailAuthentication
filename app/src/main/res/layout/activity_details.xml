@@ -33,29 +33,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="Age:"
+            android:hint="Age :"
             android:textColorHint="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/myPhNo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Phone No:"
-            android:layout_marginTop="10dp"
-            android:textColorHint="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-
 
         <TextView
             android:id="@+id/myBloodGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/blood_group"
-            android:textColor="@color/black"
             android:layout_marginTop="10dp"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
@@ -64,7 +53,7 @@
             android:id="@+id/myLocality"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Locality:"
+            android:hint="Locality :"
             android:layout_marginTop="10dp"
             android:textColorHint="@color/black"
             android:textSize="18sp"
@@ -84,32 +73,21 @@
             android:id="@+id/myState"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="State:"
+            android:hint="State :"
             android:layout_marginTop="10dp"
             android:textColorHint="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/myEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email:"
-            android:layout_marginTop="10dp"
-            android:textColorHint="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/logout_btn"
+            android:id="@+id/call_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:elevation="5dp"
-            android:text="Logout"
+            android:text="CALL"
             app:cornerRadius="10dp"
             app:rippleColor="@color/white"
             app:strokeColor="@color/white" />

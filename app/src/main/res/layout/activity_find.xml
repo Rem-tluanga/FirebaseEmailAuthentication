@@ -6,14 +6,62 @@
     android:layout_height="match_parent"
     tools:context=".FindActivity">
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/email_outlinedTextField"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:hint="Address:"
+        app:layout_constraintEnd_toStartOf="@+id/profile_spinner_blood_group"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/profileAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/profile_spinner_blood_group"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="@+id/email_outlinedTextField"
+        app:layout_constraintEnd_toStartOf="@+id/profileSearch"
+        app:layout_constraintTop_toTopOf="@+id/email_outlinedTextField"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/profileSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="8dp"
+        android:elevation="5dp"
+        android:text="@string/search"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_spinner_blood_group"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profile_spinner_blood_group"
+        app:rippleColor="@color/white"
+        app:strokeColor="@color/white" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myRecycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/email_outlinedTextField" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
