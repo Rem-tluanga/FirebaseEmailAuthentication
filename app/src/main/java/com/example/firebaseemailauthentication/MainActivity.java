@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     String userId;
+    FirebaseFirestore db;
+    DocumentReference docDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +39,12 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
-      if (currentUser != null){
-          userId = currentUser.getUid();
-      }
 
+        db = FirebaseFirestore.getInstance();
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+        if (currentUser != null){
+            userId = currentUser.getUid();
+        }
 
 
 
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                                         Log.e("TAG", document.getId() + " => " + document.get("Name").toString());
                                         startActivity(new Intent(MainActivity.this,ProfileActivity.class));
                                     } else {
+                                        mAuth.getCurrentUser().delete();
                                         Log.d("TAG", "No such document");
                                         startActivity(new Intent(MainActivity.this,SignupActivity.class));
 
@@ -100,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                                         Log.e("TAG", document.getId() + " => " + document.get("Name").toString());
                                         startActivity(new Intent(MainActivity.this,ProfileActivity.class));
                                     } else {
+                                        mAuth.getCurrentUser().delete();
                                         Log.d("TAG", "No such document");
                                         startActivity(new Intent(MainActivity.this,SignupActivity.class));
 

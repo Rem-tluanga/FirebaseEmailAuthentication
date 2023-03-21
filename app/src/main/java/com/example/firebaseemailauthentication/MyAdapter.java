@@ -1,6 +1,7 @@
 package com.example.firebaseemailauthentication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,9 +37,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         User user = userArrayList.get(position);
 
-        holder.Email.setText(user.Email);
+        holder.blood_group.setText(user.Blood_Group);
         holder.Name.setText(user.Name);
-        holder.Phone_No.setText(String.valueOf(user.Phone_No));
+        holder.district.setText(String.valueOf(user.District));
+
+        holder.itemView.setOnClickListener(v->{
+            Intent intent = new Intent(context,DetailsActivity.class);
+            intent.putExtra("name",user.Name);
+            intent.putExtra("blood_group", user.Blood_Group);intent.putExtra("blood_g", user.Blood_Group);
+            intent.putExtra("email", user.Email);
+            intent.putExtra("phone_no", user.Phone_No);
+            intent.putExtra("age", user.Age);
+            intent.putExtra("locality", user.Locality);
+            intent.putExtra("district", user.District);
+            intent.putExtra("state", user.State);
+            context.startActivity(intent);
+        });
+
     }
 
     @Override
@@ -48,14 +63,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView Email, Name, Phone_No;
+        TextView blood_group, Name, district;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            Email = itemView.findViewById(R.id.Email);
+            blood_group = itemView.findViewById(R.id.bloodgrp);
             Name = itemView.findViewById(R.id.Name);
-            Phone_No = itemView.findViewById(R.id.Phone);
+            district = itemView.findViewById(R.id.districta);
         }
     }
 }

@@ -31,16 +31,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.jar.Attributes;
 
-public class SignupActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
+public class SignupActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private TextInputEditText userEmail, userPassword, userName, locality, district, phno, state,age;
+    private TextInputEditText userEmail, userPassword, userName, locality, district, phno, state, age;
     private MaterialButton register_btn;
     private TextView login_tv;
     private FirebaseAuth mAuth;
     private ProgressBar register_progress;
     private Spinner spinnerBloodGroup;
     String userID;
-    String email,password,blood_group,name,local,phoneno,statee,districtt,agee;
+    String email, password, blood_group, name, local, phoneno, statee, districtt, agee;
+
+    DocumentReference dbDoc;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
     @Override
@@ -64,16 +67,15 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
 
         mAuth = FirebaseAuth.getInstance();
 
-        if (mAuth.getCurrentUser() != null){
+        if (mAuth.getCurrentUser() != null) {
             userID = mAuth.getCurrentUser().getUid();
-            Log.e("ID",userID);
+            Log.e("ID", userID);
+            dbDoc = db.collection("Users").document(userID);
         }
 
 
 
-
         register_btn.setOnClickListener(view -> {
-
 
             register_btn.setVisibility(View.GONE);
             register_progress.setVisibility(View.VISIBLE);
@@ -88,40 +90,38 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
             agee = age.getText().toString();
 
 
-            if (email.isEmpty() || password.isEmpty() || name.isEmpty() || phoneno.isEmpty() || local.isEmpty() || districtt.isEmpty() || statee.isEmpty() || agee.isEmpty() || blood_group.equals("Select")){
+            if (email.isEmpty() || password.isEmpty() || name.isEmpty() || phoneno.isEmpty() || local.isEmpty() || districtt.isEmpty() || statee.isEmpty() || agee.isEmpty() || blood_group.equals("Select")) {
 
-                Toast.makeText(SignupActivity.this, "These field shouldn't be Empty",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignupActivity.this, "These field shouldn't be Empty", Toast.LENGTH_SHORT).show();
                 register_btn.setVisibility(View.VISIBLE);
                 register_progress.setVisibility(View.GONE);
-            }else {
-                SignUp(email,password,name,local,districtt,phoneno,statee,agee);
+            } else {
+                SignUp(email, password, name, local, districtt, phoneno, statee, agee);
             }
             ;
 
 
         });
 
-        login_tv.setOnClickListener(V->{
-            startActivity(new Intent(this,LoginActivity.class));
+        login_tv.setOnClickListener(V -> {
+            startActivity(new Intent(this, LoginActivity.class));
             finish();
         });
 
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.Blood_Group, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.Blood_Group, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerBloodGroup.setAdapter(adapter);
 
         spinnerBloodGroup.setOnItemSelectedListener(this);
 
 
-
-
     }
 
-    private void RegisterUserAccount(String email, String password,String name,String local, String districtt,String phone,String state, String age) {
+    private void RegisterUserAccount(String email, String password, String name, String local, String districtt, String phone, String state, String age) {
         //firestore declaration
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+        userID = mAuth.getCurrentUser().getUid();
+        dbDoc = db.collection("Users").document(userID);
         Map<String, Object> user = new HashMap<>();
         user.put("Email", email);
         user.put("Name", name);
@@ -134,68 +134,86 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
 
 
 // Add a new document with a generated ID
-        db.collection("Users/"+userID)
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
+        dbDoc.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Log.d("TAG", "DocumentSnapshot added with ID: " + unused);
 
-                        //Create user and signup
-                        startActivity(new Intent(SignupActivity.this, ProfileActivity.class));
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SignupActivity.this, "Error " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
+                //Create user and signup
+                startActivity(new Intent(SignupActivity.this, ProfileActivity.class));
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(SignupActivity.this, "Error " + e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
 
 
     }
 
-    private void SignUp(String email, String password,String name,String local, String districtt,String phone,String state, String age) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+    private void SignUp(String email, String password, String name, String local, String districtt, String phone, String state, String age) {
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if (task.isSuccessful()) {
-                            userID = mAuth.getCurrentUser().getUid();
-                            Log.e("ID",userID);
-                            Toast.makeText(SignupActivity.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
-                            RegisterUserAccount(email,password,name,local,districtt,phone,state,age);
-                        } else {
+                if (task.isSuccessful()) {
+                    userID = mAuth.getCurrentUser().getUid();
+                    Log.e("ID", userID);
+                    Toast.makeText(SignupActivity.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
+                    RegisterUserAccount(email, password, name, local, districtt, phone, state, age);
+                } else {
 //                            Toast.makeText(SignupActivity.this, "Error " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                            register_btn.setVisibility(View.VISIBLE);
-                            register_progress.setVisibility(View.GONE);
-                            Log.e("ID","Error "+task.getException().getMessage());
-                            if (task.getException().getMessage().equals("The email address is already in use by another account.")){
-                                Toast.makeText(SignupActivity.this, "Account already exist!! Go to the login below.", Toast.LENGTH_LONG).show();
-                            }else{
-                                Toast.makeText(SignupActivity.this, "Error "+task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                            }
+                    register_btn.setVisibility(View.VISIBLE);
+                    register_progress.setVisibility(View.GONE);
+                    Log.e("ID", "Error " + task.getException().getMessage());
+                    if (task.getException().getMessage().equals("The email address is already in use by another account.")) {
+                        Toast.makeText(SignupActivity.this, "Account already exist!! Go to the login below.", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(SignupActivity.this, "Error " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    }
 //                            if(signUpError is PlatformException) {
 //                                if(signUpError.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
 //                                    /// ab@gmail.com has alread been registered.
 //                                }
 //                            }
-                        }
-                    }
-                });
+                }
+            }
+        });
     }
-
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        if (mAuth.getCurrentUser() != null){
+        if (mAuth.getCurrentUser() != null) {
             userID = mAuth.getCurrentUser().getUid();
-            Log.e("ID",userID);
+
+            db.collection("Users").document(userID)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    Log.d("TAG", "DocumentSnapshot data: " + document.getData());
+                                    Log.e("TAG", document.getId() + " => " + document.getData());
+                                    Log.e("TAG", document.getId() + " => " + document.get("Name").toString());
+                                    startActivity(new Intent(SignupActivity.this,ProfileActivity.class));
+                                } else {
+                                    if (mAuth.getCurrentUser() != null){
+                                        mAuth.getCurrentUser().delete();
+                                    }
+
+                                    Log.d("TAG", "No such document");
+                                }
+                            } else {
+                                Log.d("TAG", "get failed with ", task.getException());
+                            }
+                        }
+                    });
+
 
             startActivity(new Intent(SignupActivity.this, ProfileActivity.class));
         }
@@ -204,7 +222,7 @@ public class SignupActivity extends AppCompatActivity implements AdapterView.OnI
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         blood_group = adapterView.getItemAtPosition(i).toString();
-        Toast.makeText(getApplicationContext(),blood_group,Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), blood_group, Toast.LENGTH_LONG).show();
     }
 
     @Override

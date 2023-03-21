@@ -25,13 +25,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email:"
+                android:text="Blood Group:"
                 android:textColor="@color/black"
-                android:textSize="26sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/Email"
+                android:id="@+id/bloodgrp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:text="Name:"
                 android:textColor="@color/black"
-                android:textSize="26sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -87,13 +87,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ph_No:"
+                android:text="District:"
                 android:textColor="@color/black"
-                android:textSize="26sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/Phone"
+                android:id="@+id/districta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

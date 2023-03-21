@@ -66,6 +66,7 @@
                     android:id="@+id/Name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
                     android:textColor="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -83,6 +84,8 @@
                     android:id="@+id/Age"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:importantForAutofill="no"
                     android:textColor="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -101,6 +104,8 @@
                     android:id="@+id/Phno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:importantForAutofill="no"
                     android:textColor="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -139,7 +144,8 @@
                     android:id="@+id/Locality"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textFilter"
+                    android:importantForAutofill="no"
                     android:textColor="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -157,7 +163,7 @@
                     android:id="@+id/District"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
+                    android:importantForAutofill="no"
                     android:textColor="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -175,7 +181,8 @@
                     android:id="@+id/State"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
+                    android:importantForAutofill="no"
                     android:textColor="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -194,6 +201,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
+                    android:importantForAutofill="no"
                     android:textColor="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -214,6 +222,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
+                    android:importantForAutofill="no"
                     android:textColor="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
