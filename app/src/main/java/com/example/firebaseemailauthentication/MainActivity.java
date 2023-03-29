@@ -20,7 +20,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btn_find,btn_register,btn_login;
+    private Button btn_find, btn_register, btn_login;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     String userId;
@@ -40,18 +40,19 @@ public class MainActivity extends AppCompatActivity {
         currentUser = mAuth.getCurrentUser();
 
 
+        getSupportActionBar().hide();
+
         db = FirebaseFirestore.getInstance();
 
-        if (currentUser != null){
+        if (currentUser != null) {
             userId = currentUser.getUid();
         }
 
 
-
         btn_login.setOnClickListener(view -> {
-            if(currentUser == null){
-                startActivity(new Intent(this,LoginActivity.class));
-            }else {
+            if (currentUser == null) {
+                startActivity(new Intent(this, LoginActivity.class));
+            } else {
 
                 db.collection("Users").document(userId)
                         .get()
@@ -64,11 +65,12 @@ public class MainActivity extends AppCompatActivity {
                                         Log.d("TAG", "DocumentSnapshot data: " + document.getData());
                                         Log.e("TAG", document.getId() + " => " + document.getData());
                                         Log.e("TAG", document.getId() + " => " + document.get("Name").toString());
-                                        startActivity(new Intent(MainActivity.this,ProfileActivity.class));
+                                        startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                                     } else {
                                         mAuth.getCurrentUser().delete();
+                                        mAuth.signOut();
                                         Log.d("TAG", "No such document");
-                                        startActivity(new Intent(MainActivity.this,SignupActivity.class));
+                                        startActivity(new Intent(MainActivity.this, SignupActivity.class));
 
                                     }
                                 } else {
@@ -77,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
-                Log.e("Test","not empty");
-                Log.e("Test",currentUser.getEmail());
+                Log.e("Test", "not empty");
+                Log.e("Test", currentUser.getEmail());
             }
         });
 
@@ -87,9 +89,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btn_register.setOnClickListener(view -> {
-            if(currentUser == null){
-                startActivity(new Intent(this,SignupActivity.class));
-            }else{
+            if (currentUser == null) {
+                startActivity(new Intent(this, SignupActivity.class));
+            } else {
                 db.collection("Users").document(userId)
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -101,11 +103,12 @@ public class MainActivity extends AppCompatActivity {
                                         Log.d("TAG", "DocumentSnapshot data: " + document.getData());
                                         Log.e("TAG", document.getId() + " => " + document.getData());
                                         Log.e("TAG", document.getId() + " => " + document.get("Name").toString());
-                                        startActivity(new Intent(MainActivity.this,ProfileActivity.class));
+                                        startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                                     } else {
                                         mAuth.getCurrentUser().delete();
+                                        mAuth.signOut();
                                         Log.d("TAG", "No such document");
-                                        startActivity(new Intent(MainActivity.this,SignupActivity.class));
+                                        startActivity(new Intent(MainActivity.this, SignupActivity.class));
 
                                     }
                                 } else {
@@ -116,5 +119,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
     }
 }

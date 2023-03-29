@@ -55,7 +55,7 @@ public class DetailsActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(DetailsActivity.this);
             builder.setMessage("Do you want to call?");
             builder.setTitle(""+phone_no);
-            builder.setCancelable(false);
+            builder.setCancelable(true);
 
             builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
                 Uri u = Uri.parse("tel:" + phone_no);

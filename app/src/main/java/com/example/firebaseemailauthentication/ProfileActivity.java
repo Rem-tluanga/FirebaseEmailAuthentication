@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,7 +39,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
     private TextView user_email, name, phno, blood_group, locality, district, state, age;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
-    private MaterialButton logout_btn;
+    private MaterialButton logout_btn, delProfile;
     private Spinner spinnerBloodGroup;
     LinearLayout linearView;
     AlertDialog dialog;
@@ -59,7 +61,10 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
         user_email = findViewById(R.id.myEmail);
         logout_btn = findViewById(R.id.logout_btn);
         age = findViewById(R.id.myAge);
+        delProfile = findViewById(R.id.del_btn);
 
+
+        setTitle("Profile");
 
         user_email.setEnabled(false);
 
@@ -100,7 +105,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
             switch (type) {
                 case "name":
 //                    name.setText("Name : " + eText.getText().toString());
-                    db.collection("Users").document(userId).update("Name",eText.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    db.collection("Users").document(userId).update("Name", eText.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             getUserData();
@@ -108,7 +113,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ProfileActivity.this, "Update Error "+e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(ProfileActivity.this, "Update Error " + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -116,7 +121,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
 
                 case "age":
 //                    age.setText("Age : " + eText.getText().toString());
-                    db.collection("Users").document(userId).update("Age",eText.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    db.collection("Users").document(userId).update("Age", eText.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             getUserData();
@@ -124,7 +129,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ProfileActivity.this, "Update Error "+e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(ProfileActivity.this, "Update Error " + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -132,7 +137,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
 
                 case "phoneno":
 //                    phno.setText("Phone No : " + eText.getText().toString());
-                    db.collection("Users").document(userId).update("Phone_No",eText.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    db.collection("Users").document(userId).update("Phone_No", eText.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             getUserData();
@@ -140,7 +145,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ProfileActivity.this, "Update Error "+e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(ProfileActivity.this, "Update Error " + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -148,7 +153,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
 
                 case "bloodgroup":
 //                    blood_group.setText("Blood Group : " + blood_groupp);
-                    db.collection("Users").document(userId).update("Blood_Group",blood_groupp).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    db.collection("Users").document(userId).update("Blood_Group", blood_groupp).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             getUserData();
@@ -156,7 +161,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ProfileActivity.this, "Update Error "+e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(ProfileActivity.this, "Update Error " + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -164,7 +169,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
 
                 case "locality":
 //                    locality.setText("Locality : " + eText.getText().toString());
-                    db.collection("Users").document(userId).update("Locality",eText.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    db.collection("Users").document(userId).update("Locality", eText.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             getUserData();
@@ -172,7 +177,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ProfileActivity.this, "Update Error "+e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(ProfileActivity.this, "Update Error " + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -180,7 +185,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
 
                 case "district":
 //                    district.setText("District : " + eText.getText().toString());
-                    db.collection("Users").document(userId).update("District",eText.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    db.collection("Users").document(userId).update("District", eText.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             getUserData();
@@ -188,14 +193,14 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ProfileActivity.this, "Update Error "+e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(ProfileActivity.this, "Update Error " + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
                     break;
 
                 default:
 //                    state.setText("State : " + eText.getText().toString());
-                    db.collection("Users").document(userId).update("State",eText.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    db.collection("Users").document(userId).update("State", eText.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             getUserData();
@@ -203,7 +208,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ProfileActivity.this, "Update Error "+e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(ProfileActivity.this, "Update Error " + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -284,6 +289,10 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
 
         spinnerBloodGroup.setOnItemSelectedListener(this);
 
+        delProfile.setOnClickListener(v -> {
+            delAc();
+        });
+
     }
 
     private void getUserData() {
@@ -309,7 +318,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
 
                                 name.setText("Name : " + namee);
                                 phno.setText("Phone No : " + phoneno);
-                                blood_group.setText("Blood Group : " + blood_groupp );
+                                blood_group.setText("Blood Group : " + blood_groupp);
                                 locality.setText("Locality : " + local);
                                 district.setText("District : " + districtt);
                                 state.setText("State : " + statee);
@@ -327,6 +336,7 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
                             Log.d("TAG", "get failed with ", task.getException());
                             if (mAuth.getCurrentUser() != null) {
                                 mAuth.getCurrentUser().delete();
+                                mAuth.signOut();
                             }
                             startActivity(new Intent(ProfileActivity.this, SignupActivity.class));
                             finish();
@@ -350,5 +360,26 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
     public void onBackPressed() {
         startActivity(new Intent(ProfileActivity.this, MainActivity.class));
         finish();
+    }
+
+    private void delAc() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+        builder.setMessage("Are you sure?");
+        builder.setCancelable(true);
+
+        builder.setPositiveButton("Yes", (dialog, which) ->
+
+                db.collection("Users").document(userId).delete().addOnCompleteListener(task -> mAuth.getCurrentUser().delete().addOnCompleteListener(task1 -> {
+                    mAuth.signOut();
+                    startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+            finish();
+        })).addOnFailureListener(e -> Toast.makeText(ProfileActivity.this, "Error " + e.getMessage(), Toast.LENGTH_LONG).show()));
+
+        builder.setNegativeButton("No", (dialog, which) -> dialog.cancel());
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+
     }
 }

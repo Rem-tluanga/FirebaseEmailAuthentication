@@ -6,28 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".FindActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email_outlinedTextField"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/searchTxt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:hint="Address:"
+        android:background="@drawable/bginput"
+        android:hint="Enter District.."
+        android:paddingStart="10dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="8dp"
+        android:singleLine="true"
+        android:textColor="#000000"
+        android:textColorHint="#2C2C2C"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/profileSearch"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/profile_spinner_blood_group"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/profileAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toTopOf="@+id/profileSearch"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <Spinner
         android:id="@+id/profile_spinner_blood_group"
@@ -59,9 +60,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_outlinedTextField" />
+        app:layout_constraintTop_toBottomOf="@+id/searchTxt" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
